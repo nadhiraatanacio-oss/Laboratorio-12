@@ -1,0 +1,9 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Unirse a {{ sala.nombre }}{% endblock %}
+{% block contenido %}
+<section class="tarjeta centrado">
+  <h1>Te invitaron a «{{ sala.nombre }}»</h1>
+  <p>Creada por {{ sala.creador.username }} · {{ sala.miembros.count }} miembros</p>
+  <form method="post">{% csrf_token %}<button class="boton">Unirme a la sala</button></form>
+</section>
+{% endblock %}

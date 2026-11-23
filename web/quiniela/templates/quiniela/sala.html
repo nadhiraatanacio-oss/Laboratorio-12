@@ -1,0 +1,15 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}{{ sala.nombre }}{% endblock %}
+{% block contenido %}
+<h1>{{ sala.nombre }}</h1>
+<section class="tarjeta invitacion">
+  <h2>Invitar participantes</h2>
+  <p>Comparte este enlace o el código <b>{{ sala.codigo }}</b>:</p>
+  <input class="enlace-invitacion" readonly value="{{ enlace }}" onclick="this.select()">
+  <p class="nota">Creada por {{ sala.creador.username }} · {{ sala.miembros.count }} miembros</p>
+  {% if sala.creador != user %}
+    <form method="post" action="{% url 'salir' sala.codigo %}">{% csrf_token %}<button class="enlace">Salir de la sala</button></form>
+  {% endif %}
+</section>
+<section class="tarjeta"><h2>Ranking de la sala</h2>{% include "quiniela/_tabla.html" %}</section>
+{% endblock %}

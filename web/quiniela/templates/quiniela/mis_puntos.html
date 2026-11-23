@@ -1,0 +1,21 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Mis puntos{% endblock %}
+{% block contenido %}
+<h1>Mis puntos: {{ fila.total }}</h1>
+<div class="resumen">
+  <div><b>{{ fila.base }}</b><span>Base</span></div>
+  <div><b>+{{ fila.racha }}</b><span>Racha</span></div>
+  <div><b>+{{ fila.anticipada }}</b><span>Anticipada</span></div>
+  <div><b>{{ fila.efectividad }}%</b><span>Efectividad</span></div>
+</div>
+<table class="tabla">
+  <thead><tr><th>Partido</th><th>Resultado</th><th>Mi predicción</th><th>Base</th><th>Racha</th><th>Anticipada</th><th>Total</th></tr></thead>
+  <tbody>
+  {% for d in fila.detalles %}
+    <tr><td>{{ d.partido }}</td><td>{{ d.partido.goles_local }} - {{ d.partido.goles_visitante }}</td>
+      <td>{{ d.prediccion.goles_local }} - {{ d.prediccion.goles_visitante }}</td>
+      <td>{{ d.base }}</td><td>+{{ d.racha }}</td><td>+{{ d.anticipada }}</td><td class="total">{{ d.total }}</td></tr>
+  {% empty %}<tr><td colspan="7">Aún no tienes predicciones en partidos jugados.</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

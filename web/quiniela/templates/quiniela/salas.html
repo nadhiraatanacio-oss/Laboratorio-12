@@ -1,0 +1,21 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Mis salas{% endblock %}
+{% block contenido %}
+<h1>Mis salas</h1>
+<div class="dos-col">
+  <section class="tarjeta">
+    <h2>Crear sala</h2>
+    <form method="post">{% csrf_token %}{{ form.as_p }}<button class="boton">Crear</button></form>
+  </section>
+  <section class="tarjeta">
+    <h2>Unirme con código</h2>
+    <form method="post" action="{% url 'unirse_codigo' %}">{% csrf_token %}{{ unirse.as_p }}<button class="boton">Unirme</button></form>
+  </section>
+</div>
+<section class="tarjeta">
+  <h2>Salas donde participo</h2>
+  {% for s in salas %}
+    <div class="partido"><a href="{% url 'sala' s.codigo %}">{{ s.nombre }}</a><small>{{ s.miembros.count }} miembros · código {{ s.codigo }}</small></div>
+  {% empty %}<p>Todavía no estás en ninguna sala.</p>{% endfor %}
+</section>
+{% endblock %}

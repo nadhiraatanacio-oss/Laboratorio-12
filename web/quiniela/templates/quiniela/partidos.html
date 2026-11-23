@@ -1,0 +1,32 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Partidos{% endblock %}
+{% block contenido %}
+<h1>Partidos</h1>
+<p class="nota">Las predicciones cierran 10 minutos antes del inicio. Si predices con más de 24 horas de anticipación y aciertas, sumas 1 punto extra.</p>
+<table class="tabla">
+  <thead><tr><th>Fecha</th><th>Fase</th><th>Partido</th><th>Resultado</th><th>Mi predicción</th><th>Puntos</th></tr></thead>
+  <tbody>
+  {% for f in filas %}{% with p=f.partido %}
+    <tr>
+      <td>{{ p.fecha|date:"d/m/Y H:i" }}</td>
+      <td>{{ p.fase }}</td>
+      <td>{{ p.local }} vs {{ p.visitante }}</td>
+      <td>{% if p.jugado %}<b>{{ p.goles_local }} - {{ p.goles_visitante }}</b>{% else %}—{% endif %}</td>
+      <td>
+        {% if p.abierto and user.is_authenticated %}
+          <form method="post" action="{% url 'predecir' p.id %}" class="form-marcador">{% csrf_token %}
+            <input type="number" name="goles_local" min="0" max="20" required value="{{ f.prediccion.goles_local|default_if_none:'' }}" aria-label="Goles {{ p.local }}">
+            <span>-</span>
+            <input type="number" name="goles_visitante" min="0" max="20" required value="{{ f.prediccion.goles_visitante|default_if_none:'' }}" aria-label="Goles {{ p.visitante }}">
+            <button class="boton boton-chico">{% if f.prediccion %}Actualizar{% else %}Guardar{% endif %}</button>
+          </form>
+        {% elif f.prediccion %}{{ f.prediccion.goles_local }} - {{ f.prediccion.goles_visitante }}
+        {% elif p.abierto %}<a href="{% url 'login' %}?next={% url 'partidos' %}">Ingresa para predecir</a>
+        {% else %}<span class="nota">Cerrado</span>{% endif %}
+      </td>
+      <td>{% if f.detalle %}<b>{{ f.detalle.total }}</b>{% endif %}</td>
+    </tr>
+  {% endwith %}{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

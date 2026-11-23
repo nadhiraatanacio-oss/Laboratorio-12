@@ -1,0 +1,11 @@
+<table class="tabla">
+  <thead><tr><th>#</th><th>Participante</th><th>Base</th><th>Racha</th><th>Anticipada</th><th>Exactos</th><th>Efectividad</th><th>Total</th></tr></thead>
+  <tbody>
+  {% for f in tabla %}
+    <tr{% if f.usuario == user %} class="yo"{% endif %}>
+      <td>{{ forloop.counter }}</td><td>{{ f.usuario.username }}</td><td>{{ f.base }}</td><td>+{{ f.racha }}</td>
+      <td>+{{ f.anticipada }}</td><td>{{ f.exactos }}</td><td>{{ f.efectividad }}%</td><td class="total">{{ f.total }}</td>
+    </tr>
+  {% empty %}<tr><td colspan="8">Aún no hay participantes.</td></tr>{% endfor %}
+  </tbody>
+</table>

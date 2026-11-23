@@ -1,0 +1,28 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+<section class="portada">
+  <h1>Predice el Mundial y suma puntos</h1>
+  <p>Marcador exacto 5 pts · Ganador 3 pts · Diferencia de goles +2 · Racha de 3 aciertos +2 · Predicción con más de 24 h +1</p>
+  {% if user.is_authenticated %}<a class="boton" href="{% url 'partidos' %}">Hacer mis predicciones</a>
+  {% else %}<a class="boton" href="{% url 'registro' %}">Crear cuenta gratis</a>{% endif %}
+</section>
+<div class="dos-col">
+  <section class="tarjeta">
+    <h2>Próximos partidos</h2>
+    {% for p in proximos %}
+      <div class="partido"><span>{{ p.local }} <b>vs</b> {{ p.visitante }}</span><small>{{ p.fecha|date:"d/m H:i" }}</small></div>
+    {% empty %}<p>No hay partidos programados.</p>{% endfor %}
+  </section>
+  <section class="tarjeta">
+    <h2>Resultados recientes</h2>
+    {% for p in recientes %}
+      <div class="partido"><span>{{ p.local }} <b>{{ p.goles_local }} - {{ p.goles_visitante }}</b> {{ p.visitante }}</span><small>{{ p.fase }}</small></div>
+    {% empty %}<p>Aún no hay resultados.</p>{% endfor %}
+  </section>
+</div>
+<section class="tarjeta">
+  <h2>Top 5 <a class="mas" href="{% url 'ranking' %}">Ver ranking completo →</a></h2>
+  {% include "quiniela/_tabla.html" %}
+</section>
+{% endblock %}

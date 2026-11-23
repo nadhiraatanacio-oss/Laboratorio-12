@@ -1,0 +1,31 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Estadísticas{% endblock %}
+{% block contenido %}
+<h1>Estadísticas</h1>
+<div class="resumen">
+  <div><b>{{ total_preds }}</b><span>Predicciones</span></div>
+  <div><b>{{ jugados }}</b><span>Partidos jugados</span></div>
+  <div><b>{{ efectividad }}%</b><span>Aciertos globales</span></div>
+  <div><b>{{ exactos }}</b><span>Marcadores exactos</span></div>
+</div>
+<div class="dos-col">
+  <section class="tarjeta">
+    <h2>Marcadores más predichos</h2>
+    {% for m, n in marcadores %}<div class="partido"><span>{{ m }}</span><small>{{ n }} veces</small></div>{% endfor %}
+  </section>
+  <section class="tarjeta">
+    <h2>¿Qué espera la comunidad?</h2>
+    {% for t in tendencias %}
+      <div class="tendencia">
+        <span>{{ t.partido.local }} vs {{ t.partido.visitante }} <small>({{ t.total }} predicciones)</small></span>
+        <div class="barra-votos">
+          <i class="v-local" style="width:{{ t.local }}%">{% if t.local %}{{ t.local }}%{% endif %}</i>
+          <i class="v-empate" style="width:{{ t.empate }}%">{% if t.empate %}{{ t.empate }}%{% endif %}</i>
+          <i class="v-visit" style="width:{{ t.visitante }}%">{% if t.visitante %}{{ t.visitante }}%{% endif %}</i>
+        </div>
+      </div>
+    {% empty %}<p>No hay partidos pendientes.</p>{% endfor %}
+    <p class="nota">Verde: gana local · Gris: empate · Azul: gana visitante</p>
+  </section>
+</div>
+{% endblock %}

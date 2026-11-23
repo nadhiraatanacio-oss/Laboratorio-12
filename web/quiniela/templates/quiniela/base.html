@@ -1,0 +1,38 @@
+{% load static %}<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Quiniela Mundial{% endblock %} · Quiniela Mundial</title>
+  <link rel="stylesheet" href="{% static 'quiniela/estilos.css' %}">
+</head>
+<body>
+  <header class="barra">
+    <div class="contenedor fila-nav">
+      <a class="logo" href="{% url 'inicio' %}">⚽ Quiniela Mundial</a>
+      <nav>
+        <a href="{% url 'partidos' %}">Partidos</a>
+        <a href="{% url 'ranking' %}">Ranking</a>
+        <a href="{% url 'estadisticas' %}">Estadísticas</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'salas' %}">Mis salas</a>
+          <a href="{% url 'mis_puntos' %}">Mis puntos</a>
+          <form method="post" action="{% url 'logout' %}" class="en-linea">{% csrf_token %}
+            <button class="enlace">Salir ({{ user.username }})</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}">Ingresar</a>
+          <a class="boton boton-chico" href="{% url 'registro' %}">Registrarse</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+  <main class="contenedor">
+    {% for m in messages %}<div class="aviso aviso-{{ m.tags }}">{{ m }}</div>{% endfor %}
+    {% block contenido %}{% endblock %}
+  </main>
+  <footer class="pie contenedor">
+    Ejercicio educativo, sin dinero real · Atendido por el contenedor <code>{{ contenedor }}</code>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+:root { --verde: #0b6e4f; --verde-claro: #e6f4ee; --oro: #f2b705; --tinta: #1b1f23; --gris: #5f6b76; --borde: #dde3e8; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, "Segoe UI", Roboto, sans-serif; color: var(--tinta); background: #f6f8fa; }
+.contenedor { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+.barra { background: var(--verde); color: #fff; }
+.fila-nav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+.logo { color: #fff; font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+nav { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+nav a, .enlace { color: #fff; text-decoration: none; background: none; border: 0; font: inherit; cursor: pointer; padding: 0; }
+.barra .boton { color: var(--tinta); }
+.en-linea { display: inline; }
+main { padding-top: 24px; padding-bottom: 24px; }
+h1 { margin: 0 0 12px; }
+h2 { font-size: 1.1rem; margin: 0 0 12px; display: flex; justify-content: space-between; align-items: baseline; }
+.mas { font-size: .9rem; font-weight: 500; }
+a { color: var(--verde); }
+.boton { display: inline-block; background: var(--oro); color: var(--tinta); border: 0; border-radius: 8px; padding: 10px 18px; font-weight: 700; text-decoration: none; cursor: pointer; font: inherit; font-weight: 700; }
+.boton:hover { filter: brightness(.95); }
+.boton-chico { padding: 6px 12px; font-size: .9rem; }
+.portada { background: linear-gradient(120deg, var(--verde), #13896a); color: #fff; border-radius: 14px; padding: 32px; margin-bottom: 20px; }
+.portada p { opacity: .92; }
+.tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.dos-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.partido { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--borde); }
+.partido:last-child { border-bottom: 0; }
+small, .nota { color: var(--gris); }
+.tabla { width: 100%; border-collapse: collapse; background: #fff; }
+.tabla th, .tabla td { padding: 10px 8px; border-bottom: 1px solid var(--borde); text-align: left; }
+.tabla th { background: var(--verde-claro); font-size: .85rem; text-transform: uppercase; letter-spacing: .03em; }
+.tabla .total { font-weight: 800; color: var(--verde); }
+.tabla tr.yo { background: #fff8e1; }
+.form-marcador { display: flex; gap: 6px; align-items: center; }
+.form-marcador input { width: 52px; padding: 6px; border: 1px solid var(--borde); border-radius: 6px; }
+.aviso { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; background: var(--verde-claro); }
+.aviso-error { background: #fde8e8; }
+.resumen { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.resumen div { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 16px; text-align: center; }
+.resumen b { display: block; font-size: 1.8rem; color: var(--verde); }
+.centrado { max-width: 440px; margin: 20px auto; }
+form p { display: flex; flex-direction: column; gap: 4px; }
+form input[type=text], form input[type=password] { padding: 8px; border: 1px solid var(--borde); border-radius: 6px; }
+.helptext, .errorlist { font-size: .85rem; color: var(--gris); }
+.enlace-invitacion { width: 100%; padding: 10px; border: 1px dashed var(--verde); border-radius: 8px; font-family: monospace; }
+.invitacion .enlace { color: var(--verde); }
+.tendencia { margin-bottom: 14px; }
+.barra-votos { display: flex; height: 22px; border-radius: 6px; overflow: hidden; background: var(--borde); margin-top: 4px; }
+.barra-votos i { font-style: normal; font-size: .75rem; color: #fff; display: flex; align-items: center; justify-content: center; }
+.v-local { background: var(--verde); } .v-empate { background: #8a949e; } .v-visit { background: #2563eb; }
+.pie { padding: 24px 16px; color: var(--gris); font-size: .85rem; }
+@media (max-width: 640px) { .tabla { font-size: .85rem; } .portada { padding: 20px; } }

@@ -1,0 +1,8 @@
+{% extends "quiniela/base.html" %}
+{% block titulo %}Registro{% endblock %}
+{% block contenido %}
+<section class="tarjeta centrado">
+  <h1>Crear cuenta</h1>
+  <form method="post">{% csrf_token %}{{ form.as_p }}<button class="boton">Registrarme</button></form>
+</section>
+{% endblock %}
